@@ -28,7 +28,7 @@ primitive U8Array
   fun equal(a: Array[U8] ref^, b: Array[U8] ref^) : Bool =>
     try
       if (a.size() != b.size()) then
-        return true
+        return false
       end
       for i in Range(0, a.size()) do
         if a(i)? != b(i)? then
