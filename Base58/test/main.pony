@@ -3,9 +3,9 @@ use ".."
 use "collections"
 
 primitive Fixtures
-  fun valid (): Array[(String, Array[U8])] ref^ =>
+  fun valid (): Array[(String, Array[U8] val)] ref^ =>
     try
-      var fixtures: Array[(String, Array[U8])] ref^ = Array[(String, Array[U8])](14)
+      var fixtures: Array[(String, Array[U8] val)] ref^ = Array[(String, Array[U8] val)](14)
       fixtures(0)? = ("2g", [54; 49])
       fixtures(1)? = ("a3gV", [54; 50; 54; 50; 54; 50])
       fixtures(2)? = ("aPEr", [54; 51; 54; 51; 54; 51])
@@ -25,7 +25,7 @@ primitive Fixtures
     end
 
 primitive U8Array
-  fun equal(a: Array[U8] ref^, b: Array[U8] ref^) : Bool =>
+  fun equal(a: Array[U8] val, b: Array[U8] val) : Bool =>
     try
       if (a.size() != b.size()) then
         return false
@@ -53,7 +53,7 @@ actor Main is TestList
 class iso _TestEmpty is UnitTest
   fun name(): String => "Testing Empty Array"
   fun apply(t: TestHelper) =>
-    var buf: Array[U8] = []
+    var buf: Array[U8] val = []
     try
       var result: String ref^ =  Base58.encode(buf)?
       t.assert_true(result == "")
@@ -66,8 +66,8 @@ class iso _TestFixtures is UnitTest
   fun apply(t: TestHelper) =>
     var fixtures = Fixtures.valid()
     for fixture in fixtures.values() do
-      let encoded: String ref^ = try Base58.encode(fixture._2)? else String(0) end
+      let encoded: String = recover try Base58.encode(fixture._2)? else String(0) end end
       t.assert_true(encoded == fixture._1)
-      let decoded: Array[U8] ref^ = try Base58.decode(encoded)? else Array[U8](0) end
+      let decoded: Array[U8] val = recover try Base58.decode(encoded)? else Array[U8](0) end end
       t.assert_true(U8Array.equal(decoded, fixture._2))
     end

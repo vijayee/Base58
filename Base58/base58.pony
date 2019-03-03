@@ -131,7 +131,7 @@ primitive Base58ByteMap
     end
 
 primitive Base58
-  fun encode(data: Array[U8]) : String ref^ ? =>
+  fun encode(data: Array[U8] val) : String ref^ ? =>
     if (data.size() == 0) then
       return String(0)
     end
@@ -186,7 +186,7 @@ primitive Base58
     end
     str
 
-fun decode(data: String ref^) : Array[U8] ref^ ? =>
+fun decode(data: String) : Array[U8] ref^ ? =>
     var psz: USize = 0
     var zeroes: USize = 0
     var length: USize = 0
