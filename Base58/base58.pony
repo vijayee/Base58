@@ -131,7 +131,7 @@ primitive Base58ByteMap
     end
 
 primitive Base58
-  fun encode(data: Array[U8] val) : String ref^ ? =>
+  fun encode(data: Array[U8] box) : String ref^ ? =>
     if (data.size() == 0) then
       return String(0)
     end
