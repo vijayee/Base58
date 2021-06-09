@@ -7,7 +7,7 @@
     "homepage": "https://github.com/vijayee/Base58",
     "license": "GPLv3",
     "version": "0.0.1",
-    "name": "liboffs"
+    "name": "Base58"
   },
   "deps": []
 }
