@@ -1,6 +1,6 @@
 {
   "packages": [
-    "liboffs"
+    "Base58"
   ],
   "info": {
     "description": "Base58 encoding for pony ",
